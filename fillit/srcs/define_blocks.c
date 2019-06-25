@@ -26,14 +26,14 @@ int define_blocks(char *o_arr, t_p *lstpj, int w)
 		lstpj->name[i] = o_arr[i] - 'E';
 		i++;
 	}
-
+/*
 	i = 1;
 	while (o_arr[i] != 'E')
 	{
 		lstpj->value = lstpj->value + ((o_arr[i] - 'E') << ( w * w - w * i + w - 4))
 		i++;
 	}
-
+*/
 /*problem: the above needs to be separated out, since this is read block by block,
 at the time of reading we still have no idea how many blocks there are in total,
 therefore cannot define lstpj->value since beginning boardsize is not known yet.
