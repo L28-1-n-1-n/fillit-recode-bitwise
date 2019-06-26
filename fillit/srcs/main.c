@@ -7,24 +7,6 @@
 #include <stdlib.h>
 #include <time.h> /*to remove*/
 
-/*
-void regen_value(t_p *lstp, int w)
-{
-	int i;
-
-	i = 0;
-	while (lstp[i].name[0] != 20)
-	{
-		while (lstp[i].name[j] != 0)
-		{
-			lstpj->value = lstpj->value + (lstp[i].name[j] << ( w * w - w * i + w - 4))
-			j++;
-		}
-		i++;
-	}
-}
-*/
-
 int		main(int argc, char **argv)
 {
 		int		j;
@@ -57,10 +39,11 @@ int		main(int argc, char **argv)
 	      write(1, "Error\n", 6);
 	      return (0);
 	   }
-		printf("j is now %d in main\n", j);
-		boardsize = ft_lsqrt(j * 4);
+		 boardsize = ft_lsqrt(j * 4);
+		 
+//		printf("j is now %d in main\n", j);
 
-		printf("boardsize is %d\n", boardsize);
+/*		printf("boardsize is %d\n", boardsize);
 
 		while (lstp[i].name[0] != 20)
 		{
@@ -81,15 +64,6 @@ int		main(int argc, char **argv)
 			printf("lstp[%d].name[0] is %d\n", i, lstp[i].name[0]);
 			i++;
 		}
-
-
-	//	solveboard(&lstp[0], board, arr, boardsize);
-
-/*		while (!(solveboard(&lstp[0], board, arr, boardsize)))
-		{
-			gen_board(board);
-			solveboard(&lstp[0], board, arr, boardsize+1);
-		}
 */
 
 		gen_board(board, boardsize);
@@ -98,7 +72,7 @@ int		main(int argc, char **argv)
 		{
 			boardsize = boardsize + 1;
 			gen_board(board, boardsize);
-		//	regen_value(lstp, boardsize);
+
 			printf("A  N E W  B O A R D S I Z E  I S  N O W  A D D E D %d\n", boardsize);
 			solveboard(&lstp[0], board, arr, boardsize, lstp);
 		}

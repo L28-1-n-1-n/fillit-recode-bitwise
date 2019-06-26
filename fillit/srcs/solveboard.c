@@ -16,12 +16,12 @@ int solveboard(t_p *lstpj, __uint128_t *board, int *arr, int boardsize, t_p *lst
 		}
 		if (arr[0] == -1)
 			return (1);
-		printf("before placepiece, this piece is %d\n", lstpj->name[0]);
+//		printf("before placepiece, this piece is %d\n", lstpj->name[0]);
 		while ((arr[0] != -1) && (lstpj->name[0] != 20) && (i < boardsize * boardsize))
 		{
 					if(place_piece(i, lstpj, board, boardsize))
 					{
-						printf("place_piece passed with i: %d\n", i);
+				//		printf("place_piece passed with i: %d\n", i);
 
 					/*	k = 0;
 						while (k <= boardsize)
@@ -29,22 +29,23 @@ int solveboard(t_p *lstpj, __uint128_t *board, int *arr, int boardsize, t_p *lst
 							printf("board[%d] has value %d\n", k, board[k]);
 							k++;
 						}*/
-						printf("\nhola\n");
-						print_board(lstp, boardsize);
+
+				//		printf("\nhola\n");
+				//		print_board(lstp, boardsize);
 
 						lstpj += 1;
-						printf("the next piece is %d\n", lstpj->name[0]);
+				//		printf("the next piece is %d\n", lstpj->name[0]);
 						if (solveboard(lstpj, board, arr, boardsize, lstp))
 						{
-							printf("pass to solveboard, lstpj++ : %d", lstpj->name[0]);
+				//			printf("pass to solveboard, lstpj++ : %d", lstpj->name[0]);
 							return (1);
 						}
 						else
 						{
 							lstpj = lstpj - 1;
-							printf("about to unplace istpj : %d", lstpj->name[0]);
+				//			printf("about to unplace istpj : %d", lstpj->name[0]);
 							unplace_piece(i, lstpj, board, boardsize);
-							printf("after unplace, lstpj is now %d\n", lstpj->name[0]);
+			//				printf("after unplace, lstpj is now %d\n", lstpj->name[0]);
 			//				print_board(lstp, boardsize);
 							i++;
 						}
@@ -52,7 +53,7 @@ int solveboard(t_p *lstpj, __uint128_t *board, int *arr, int boardsize, t_p *lst
 					}
 					else
 					{
-						printf("placepiec rejected - i: %d, lstpj: %d\n\n", i, lstpj->name[0]);
+				//		printf("placepiec rejected - i: %d, lstpj: %d\n\n", i, lstpj->name[0]);
 						i++;
 					}
 		}

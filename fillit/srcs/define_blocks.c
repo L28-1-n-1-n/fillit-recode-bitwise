@@ -31,9 +31,10 @@ int define_blocks(char *o_arr, t_p *lstpj)
 	while (lstpj->name[i])
 	{
 		lstpj->value |= ((__uint128_t)(lstpj->name[i]) << ( 128 - 16 * i + 12));
-		printf("%d zeros added after %d\n",64 - 16 * i + 12, lstpj->name[i]);
+//		printf("%d zeros added after %d\n",64 - 16 * i + 12, lstpj->name[i]);
 		i++;
 	}
+	lstpj->height = i - 1;
 //	printf("Block value of %d is %llu\n", lstpj->name[0], lstpj->value);
 
 /*problem: the above needs to be separated out, since this is read block by block,

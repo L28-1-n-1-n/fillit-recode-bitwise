@@ -4,8 +4,8 @@
 
 void	write_alpha(t_p* lstpj, char *final, char alpha, int w)
 {
-	unsigned int i;
-	unsigned int k;
+	int i;
+	int k;
 	unsigned int new_pos;
 
 	i = 3;
@@ -13,7 +13,7 @@ void	write_alpha(t_p* lstpj, char *final, char alpha, int w)
 	new_pos = (lstpj->pos / w) * 16 + lstpj->pos % w; /*translate position from i based dependent on w, to 16 based*/
 	while(lstpj->name[k] != 0)
 	{
-		while (i)
+		while (i >= 0)
 		{
 			if ((lstpj->name[k] >> (3 - i)) % 2) /* so we get >>0 , >> 1, >> 2 , >>3)*/
 				final[new_pos + i + 16 * (k - 1)] = alpha; /* so we get +3, +2, + 1, +0, and first k-1 = 0 */

@@ -41,14 +41,14 @@
 # define RD "MGSEEE"
 # define RL "NMMQEE"
 # define H "OTEEEE"
-# define TU "PMSEEE"
+# define TU "PISEEE"
 # define TL "QMQMEE"
 # define TD "RSIEEE"
 # define TR "SIQIEE"
 # define S "TQQEEE"
 # define LU "UMSEEE"
 # define LR "VQMMEE"
-# define LD "WSIEEE"
+# define LD "WSGEEE"
 # define LL "XIIQEE"
 # define NA "YEEEEE"
 # define ER "EEEEEE"
@@ -63,7 +63,8 @@ struct				s_p
 {
 	unsigned int	name[6];
 	unsigned int	pos; /* value is pos of the block in board eventually*/
-	__uint128_t			value;
+	__uint128_t		value;
+	unsigned int 	height;
 };
 
 int		read_blocks(int fd, t_p *lstp);
