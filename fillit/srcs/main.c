@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <time.h> /*to remove*/
 
+/*
 void regen_value(t_p *lstp, int w)
 {
 	int i;
@@ -22,6 +23,7 @@ void regen_value(t_p *lstp, int w)
 		i++;
 	}
 }
+*/
 
 int		main(int argc, char **argv)
 {
@@ -30,7 +32,7 @@ int		main(int argc, char **argv)
 		int		k; /*for debug only, will delete later */
 		int		boardsize;
 		t_p		*lstp;
-		int		*board;
+		__uint128_t		*board;
 		int		*arr;
 
 		double total_time; /*to remove*/
@@ -39,7 +41,7 @@ int		main(int argc, char **argv)
 		j = 0;
 		i = 0;
 		k = 0;
-		if ((!(board = (uint128_t *)malloc(sizeof(uint128_t) * 2))) ||
+		if ((!(board = (__uint128_t *)malloc(sizeof(__uint128_t) * 2))) ||
 		(!(arr = (int *)malloc(sizeof(int) * 256))))
 			return (0);
 		if(!(lstp = (t_p *)malloc(sizeof(t_p) * 28)))
@@ -55,10 +57,10 @@ int		main(int argc, char **argv)
 	      write(1, "Error\n", 6);
 	      return (0);
 	   }
-	//	printf("j is now %d in main\n", j);
+		printf("j is now %d in main\n", j);
 		boardsize = ft_lsqrt(j * 4);
-		regen_value(lstp, boardsize);
-//		printf("boardsize is %d\n", boardsize);
+
+		printf("boardsize is %d\n", boardsize);
 /*
 		while (lstp[i].name[0] != 20)
 		{
@@ -90,13 +92,13 @@ int		main(int argc, char **argv)
 		}
 */
 
-		gen_board(board);
+		gen_board(board, boardsize);
 		gen_arr(arr);
 		while (!solveboard(&lstp[0], board, arr, boardsize, lstp))
 		{
-			gen_board(board);
 			boardsize = boardsize + 1;
-			regen_value(lstp, boardsize);
+			gen_board(board, boardsize);
+		//	regen_value(lstp, boardsize);
 			printf("A  N E W  B O A R D S I Z E  I S  N O W  A D D E D %d\n", boardsize);
 			solveboard(&lstp[0], board, arr, boardsize, lstp);
 		}

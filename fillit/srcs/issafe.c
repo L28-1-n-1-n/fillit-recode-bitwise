@@ -2,9 +2,8 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-int		issafe(int i, int *name, int w, int *arr)
+int		issafe(int i, int *name, int w)
 {
-	(void )arr;
 
 	if ((name[0] == 3) || (name[0] == 11))
 		{
@@ -24,6 +23,11 @@ int		issafe(int i, int *name, int w, int *arr)
 		}
 		return (0);
 }
+
+/*
+Actually boundary width and boundary height do not change per boardsize. These 2 values
+should be predefined, actuall no need. Just make a board with those values crossed out to begin with.
+*/
 /*
 int		issafe(int i, int *name, int w, int *arr)
 {

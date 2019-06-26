@@ -55,6 +55,7 @@
 # define ERROR -1
 
 # include "libft.h"
+# include <stdint.h>
 
 
 typedef struct s_p 	t_p;
@@ -69,13 +70,13 @@ int		read_blocks(int fd, t_p *lstp);
 int		tetri_offset(int *arr, t_p *lstpj);
 int		define_blocks(char *o_arr, t_p *lstpj);
 int		ft_lsqrt(int nb);
-int		issafe(int i, int *name, int w, int *arr);
+int		issafe(int i, int *name, int w);
 void	gen_arr(int *arr);
-void	gen_board(int *board);
-int		place_piece(int arri, t_p *lstpj, int *board, int boardsize);
-void	unplace_piece(int arri, t_p *lstpj, int *board, int boardsize);
+void	gen_board(__uint128_t *board, int w);
+int		place_piece(int i, t_p *lstpj, __uint128_t *board, int w);
+void	unplace_piece(int i, t_p *lstpj, __uint128_t *board, int w);
 void	print_board(t_p*lstp, int boardsize);
-int		solveboard(t_p *lstpj, int *board, int *arr, int boardsize, t_p *lstp);
+int		solveboard(t_p *lstpj, __uint128_t *board, int *arr, int boardsize, t_p *lstp);
 
 
 

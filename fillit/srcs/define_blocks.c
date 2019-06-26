@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int define_blocks(char *o_arr, t_p *lstpj, int w)
+int define_blocks(char *o_arr, t_p *lstpj)
 {
 	int i;
 
@@ -26,19 +26,22 @@ int define_blocks(char *o_arr, t_p *lstpj, int w)
 		lstpj->name[i] = o_arr[i] - 'E';
 		i++;
 	}
-/*
+
 	i = 1;
 	while (o_arr[i] != 'E')
 	{
-		lstpj->value = lstpj->value + ((o_arr[i] - 'E') << ( w * w - w * i + w - 4))
+		lstpj->value = lstpj->value + ((o_arr[i] - 'E') << ( 64 - 16 * i + 12));
 		i++;
 	}
-*/
+
 /*problem: the above needs to be separated out, since this is read block by block,
 at the time of reading we still have no idea how many blocks there are in total,
 therefore cannot define lstpj->value since beginning boardsize is not known yet.
 Better separate this out as a function after boardsize is defined, like that the function
 can be called every time boardsize has changed*/
+
+/*Or, value constant at taille 16, but i only loops through 0 to < w * w
+and put safety mask beyond w */
 
 	return (1);
 }
