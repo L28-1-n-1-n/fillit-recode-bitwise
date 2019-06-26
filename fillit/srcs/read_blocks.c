@@ -58,8 +58,9 @@ int	valid_block(char *temp, t_p *lstpj)
 		return (ERROR);
 	}
 	/*count != 4 --> less than 4 '#' found; arr[4] != -1 --> more than 4 '#' found */
-	tetri_offset(arr, lstpj);
+	//tetri_offset(arr, lstpj);
 //	printf("This tetrimino is %d\n", lstpj->name[0]);
+	printf("tetri_offset is called\n");
 	return(tetri_offset(arr, lstpj));
 }
 
@@ -100,7 +101,7 @@ void init_blocks(t_p *lstp)
 	int ret;
 
 	ret = 0;
-	while (ret < 29)
+	while (ret < 28)
 	{
 		/*initialize with null values*/
 		define_blocks(NA, &lstp[ret]);

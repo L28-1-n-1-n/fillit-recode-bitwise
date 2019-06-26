@@ -5,6 +5,8 @@
 void	gen_board(__uint128_t *board, int w)
 {
 	int i;
+	char *tmp_board;
+	__uint128_t k;
 
 	board[0] = (__uint128_t)0;
 	board[1] = (__uint128_t)0;
@@ -33,6 +35,47 @@ void	gen_board(__uint128_t *board, int w)
 			}
 			board[1] = board[1] + ((__uint128_t)65535 << ((16 - w - 1)) * 16);
 		}
+
+/*testing begins*/
+
+		tmp_board = (char *)malloc(sizeof(char) * 256);
+		i = 0;
+		while (i < 256)
+			tmp_board[i++] = '.';
+		tmp_board[i] = 0;
+
+		i = 127;
+		k = 0;
+		while (i >= 0)
+		{
+			if ((board[0] >> k) % 2)
+				tmp_board[i] = 'X';
+			k++;
+			i--;
+		}
+
+		i = 255;
+		k = 0;
+		while (i >= 128)
+		{
+			if ((board[1] >> k) % 2)
+				tmp_board[i] = 'X';
+			k++;
+			i--;
+		}
+
+		i = 0;
+		while (i < 256)
+		{
+			if (i % 16 == 0)
+				printf("\n");
+			printf("%c ", tmp_board[i]);
+			i++;
+		}
+		free(tmp_board);
+
+		/*testing ends*/
+		
 }
 	/*actually dont bother limiting the 1111 to width + 1, just go ahead and block
 	out the whole row below the desired width*/

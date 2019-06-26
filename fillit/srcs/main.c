@@ -44,9 +44,9 @@ int		main(int argc, char **argv)
 		if ((!(board = (__uint128_t *)malloc(sizeof(__uint128_t) * 2))) ||
 		(!(arr = (int *)malloc(sizeof(int) * 256))))
 			return (0);
-		if(!(lstp = (t_p *)malloc(sizeof(t_p) * 28)))
+		if(!(lstp = (t_p *)malloc(sizeof(t_p) * 27)))
 			return (0);
-		/*28 becoz 26 + signal end + zero end*/
+		/*28 becoz 26 + signal end*/
 		if (argc != 2)
 				return (0);
 		if (open(argv[1], O_RDONLY) < 1)
@@ -61,7 +61,7 @@ int		main(int argc, char **argv)
 		boardsize = ft_lsqrt(j * 4);
 
 		printf("boardsize is %d\n", boardsize);
-/*
+
 		while (lstp[i].name[0] != 20)
 		{
 			k = 0;
@@ -81,7 +81,7 @@ int		main(int argc, char **argv)
 			printf("lstp[%d].name[0] is %d\n", i, lstp[i].name[0]);
 			i++;
 		}
-*/
+
 
 	//	solveboard(&lstp[0], board, arr, boardsize);
 

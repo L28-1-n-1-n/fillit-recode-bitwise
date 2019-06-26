@@ -1,4 +1,5 @@
 #include "fillit.h"
+#include <stdio.h>
 
 //tetri_offset is called after only 4# is found in each block
 //it loops through tetri_offset, which calls id_tetri, which calls id_tetri_extend to idenfift the tetrimino
