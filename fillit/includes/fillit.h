@@ -63,7 +63,7 @@ struct				s_p
 {
 	unsigned int	name[6];
 	unsigned int	pos; /* value is pos of the block in board eventually*/
-	uint64_t			value;
+	__uint128_t			value;
 };
 
 int		read_blocks(int fd, t_p *lstp);

@@ -27,13 +27,15 @@ int define_blocks(char *o_arr, t_p *lstpj)
 		i++;
 	}
 	i = 1;
+
 	while (lstpj->name[i])
 	{
-		lstpj->value = lstpj->value + ((lstpj->name[i]) << ( 64 - 16 * i + 12));
+		lstpj->value |= ((__uint128_t)(lstpj->name[i]) << ( 128 - 16 * i + 12));
 		printf("%d zeros added after %d\n",64 - 16 * i + 12, lstpj->name[i]);
 		i++;
 	}
-	printf("Block value of %d is %llu\n", lstpj->name[0], lstpj->value);
+//	printf("Block value of %d is %llu\n", lstpj->name[0], lstpj->value);
+
 /*problem: the above needs to be separated out, since this is read block by block,
 at the time of reading we still have no idea how many blocks there are in total,
 therefore cannot define lstpj->value since beginning boardsize is not known yet.

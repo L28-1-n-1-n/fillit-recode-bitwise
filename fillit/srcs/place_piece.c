@@ -10,11 +10,12 @@ int		place_piece(int i, t_p *lstpj, __uint128_t *board, int w)
 		char *demo_board;
 		int k;
 
+		printf("\ni : %d, w: %d, (i / w) * 16 + i mod w : %d\n", i, w, (i / w) * 16 + i % w);
 		demo1 = (__uint128_t)(lstpj->value >> ((i / w) * 16 + i % w));
 		demo2 = (__uint128_t)(lstpj->value >> ((i / w - 8) * 16 + i % w));
-
+		//printf("lstpj->value is %llu\n", lstpj->value);
 		demo_board = (char *)malloc(sizeof(char) * 256);
-
+		printf("\nNow printing demo_board:\n");
 		i = 0;
 		while (i < 256)
 			demo_board[i++] = '.';
