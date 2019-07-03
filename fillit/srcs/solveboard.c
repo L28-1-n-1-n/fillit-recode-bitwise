@@ -16,9 +16,11 @@ int solveboard(t_p *lstpj, __uint128_t *board, int *arr, int boardsize, t_p *lst
 		}
 		if (arr[0] == -1)
 			return (1);
-//		printf("before placepiece, this piece is %d\n", lstpj->name[0]);
+		printf("before placepiece, this piece is %d\n", lstpj->name[0]);
+		printf("before placepiece, height is %d\n", lstpj->height);
 		while ((arr[0] != -1) && (lstpj->name[0] != 20) && (i < boardsize * boardsize))
 		{
+					printf("solveboard before placepiece, height : %d\n", lstpj->height);
 					if(place_piece(i, lstpj, board, boardsize))
 					{
 				//		printf("place_piece passed with i: %d\n", i);
@@ -31,7 +33,7 @@ int solveboard(t_p *lstpj, __uint128_t *board, int *arr, int boardsize, t_p *lst
 						}*/
 
 				//		printf("\nhola\n");
-				//		print_board(lstp, boardsize);
+				 		print_board(lstp, boardsize);
 
 						lstpj += 1;
 				//		printf("the next piece is %d\n", lstpj->name[0]);

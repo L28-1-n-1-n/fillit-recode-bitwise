@@ -5,8 +5,8 @@
 void	gen_board(__uint128_t *board, int w)
 {
 	int i;
-//	char *tmp_board;
-//	__uint128_t k;
+	char *tmp_board;
+	__uint128_t k;
 
 	board[0] = (__uint128_t)0;
 	board[1] = (__uint128_t)0;
@@ -36,7 +36,7 @@ void	gen_board(__uint128_t *board, int w)
 			board[1] = board[1] + ((__uint128_t)65535 << ((16 - w - 1)) * 16);
 		}
 
-/*testing begins
+/*testing begins*/
 
 		tmp_board = (char *)malloc(sizeof(char) * 256);
 		i = 0;
@@ -74,7 +74,7 @@ void	gen_board(__uint128_t *board, int w)
 		}
 		free(tmp_board);
 
-		testing ends*/
+		/*testing ends*/
 
 }
 	/*actually dont bother limiting the 1111 to width + 1, just go ahead and block

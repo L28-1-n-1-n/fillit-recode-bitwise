@@ -40,7 +40,9 @@ int		main(int argc, char **argv)
 	      return (0);
 	   }
 		 boardsize = ft_lsqrt(j * 4);
-		 
+
+
+
 //		printf("j is now %d in main\n", j);
 
 /*		printf("boardsize is %d\n", boardsize);
@@ -68,6 +70,13 @@ int		main(int argc, char **argv)
 
 		gen_board(board, boardsize);
 		gen_arr(arr);
+		k = 0;
+		while (k < 27)
+		{
+			printf("lstpj->height is %d\n", lstp[k].height);
+			k++;
+		}
+		k = 0;
 		while (!solveboard(&lstp[0], board, arr, boardsize, lstp))
 		{
 			boardsize = boardsize + 1;
