@@ -1,35 +1,6 @@
 #ifndef FILLIT_H
 # define FILLIT_H
 
-/*
-# define BUFF_SIZE 21
-# define ZL "FGFHKHAAA"
-# define ZU "GDGFFHGAA"
-# define ZR "HFDFGHKAA"
-# define ZD "IFGGGHFAA"
-# define D "JEHFFFFFA"
-# define RU "KGFHLIAAA"
-# define RR "LFGGHFFAA"
-# define RD "MCFFFLAAA"
-# define RL "NFGGGGHAA"
-# define H "OHEITAAAA"
-# define TU "PFDFGGLAA"
-# define TL "QFGGGHGAA"
-# define TD "RGFHLGAAA"
-# define TR "SDGFFHFAA"
-# define S "TFFGHHAAA"
-# define LU "UGFHILAAA"
-# define LR "VFGGHGGAA"
-# define LD "WGFHLFAAA"
-# define LL "XDGFFFHAA"
-# define NA "YAAAAAAAA"
-# define ER "EAAAAAAAA"
-# define ERROR -1
-
-# include "libft.h"
-*/
-
-
 # define BUFF_SIZE 21
 # define ZL "FQKEEE"
 # define ZU "GIQMEE"
@@ -65,6 +36,7 @@ struct				s_p
 	unsigned int	pos; /* value is pos of the block in board eventually*/
 	__uint128_t		value;
 	unsigned int 	height;
+	unsigned int	found;
 };
 
 int		read_blocks(int fd, t_p *lstp);
@@ -77,7 +49,7 @@ void	gen_board(__uint128_t *board, int w);
 int		place_piece(int i, t_p *lstpj, __uint128_t *board, int w);
 void	unplace_piece(int i, t_p *lstpj, __uint128_t *board, int w);
 void	print_board(t_p*lstp, int boardsize);
-int		solveboard(t_p *lstpj, __uint128_t *board, int *arr, int boardsize, t_p *lstp);
+int		solveboard(t_p *lstpj, __uint128_t *board, int boardsize, t_p *lstp);
 
 
 

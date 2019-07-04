@@ -1,21 +1,9 @@
 #include "fillit.h"
-#include <stdio.h>
 
 //tetri_offset is called after only 4# is found in each block
-//it loops through tetri_offset, which calls id_tetri, which calls id_tetri_extend to idenfift the tetrimino
+//it loops through tetri_offset, which calls id_tetri, which calls id_tetri_extend to idenfify the tetrimino
 //if the 4#'s positions do not match any tetrimino, return NULL
 //The NULL returned should be interpreted as error in read_block
-
-/*
-
-Also: how to check if all pieces are neighbouring each other:
-For each piece, all neighbouring position are unique offsets that together form a circle around the piece. Just need to check if the side is not by the border, then these neibouring positions / offsets must NOT be all dots (if all dots, then isolated piece.
-
-*/
-
-
-
-
 
 char *id_tetri_extend(int *arr)
 {

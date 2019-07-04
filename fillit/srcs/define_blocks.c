@@ -26,28 +26,16 @@ int define_blocks(char *o_arr, t_p *lstpj)
 		lstpj->name[i] = o_arr[i] - 'E';
 		i++;
 	}
-	i = 1;
 
+	i = 1; /*starts from the first position that codes for block shape*/
 	while (lstpj->name[i])
 	{
 		lstpj->value |= ((__uint128_t)(lstpj->name[i]) << ( 128 - 16 * i + 12));
-		printf("%d zeros added after %d\n",64 - 16 * i + 12, lstpj->name[i]);
-		printf("currently i is %d\n", i);
 		i++;
 	}
-	printf("i is %d\n", i);
 	lstpj->height = i - 1;
-	printf("lstpj->height is %d\n", lstpj->height);
-//	printf("Block value of %d is %llu\n", lstpj->name[0], lstpj->value);
 
-/*problem: the above needs to be separated out, since this is read block by block,
-at the time of reading we still have no idea how many blocks there are in total,
-therefore cannot define lstpj->value since beginning boardsize is not known yet.
-Better separate this out as a function after boardsize is defined, like that the function
-can be called every time boardsize has changed*/
-
-/*Or, value constant at taille 16, but i only loops through 0 to < w * w
-and put safety mask beyond w */
+	//printf("i is %d and lstpj->height is %d\n", i, lstpj->height);
 
 	return (1);
 }

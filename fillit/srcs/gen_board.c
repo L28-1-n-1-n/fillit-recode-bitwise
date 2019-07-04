@@ -5,8 +5,6 @@
 void	gen_board(__uint128_t *board, int w)
 {
 	int i;
-	char *tmp_board;
-	__uint128_t k;
 
 	board[0] = (__uint128_t)0;
 	board[1] = (__uint128_t)0;
@@ -36,8 +34,10 @@ void	gen_board(__uint128_t *board, int w)
 			board[1] = board[1] + ((__uint128_t)65535 << ((16 - w - 1)) * 16);
 		}
 
-/*testing begins*/
-
+/* To print the border*/
+/*
+		char *tmp_board;
+		__uint128_t k;
 		tmp_board = (char *)malloc(sizeof(char) * 256);
 		i = 0;
 		while (i < 256)
@@ -73,18 +73,10 @@ void	gen_board(__uint128_t *board, int w)
 			i++;
 		}
 		free(tmp_board);
-
-		/*testing ends*/
+*/
+		/* End of printing border*/
 
 }
-	/*actually dont bother limiting the 1111 to width + 1, just go ahead and block
-	out the whole row below the desired width*/
-
-//	board[0] = board[0] + ((65535 >> (16 - w - 1)) << (128 - 16 * (w + 1) + (16 - w -1)));
-	/*This is essentially equal to 1111111111111111 >> (16 - w - 1), then << (128 - 16 * w) */
-	/*This is equal to creating bottom row of 1s, with (w + 1) no of 1s*/
-
-
 
 /*
 Boundary for w of 2 is
@@ -99,12 +91,10 @@ PLUS
 0000
 1110
 0000
-*/
 
-/*
-	while (i < 16)
-	{
-		printf("board[i] has value %d\n", board[i]);
-		i++;
-	}
+which gives:
+00X0
+00X0
+XXX0
+0000
 */
