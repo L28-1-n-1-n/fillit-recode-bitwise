@@ -61,7 +61,7 @@ int		main(int argc, char **argv)
 
 		end = clock(); /*to remove*/
 		total_time = ((double) (end - start)/CLOCKS_PER_SEC); /*to remove*/
-		printf("Time taken: %f seconds\n", total_time); /*to remove*/
+	//	printf("Time taken: %f seconds\n", total_time); /*to remove*/
 
 		return (0);
 }

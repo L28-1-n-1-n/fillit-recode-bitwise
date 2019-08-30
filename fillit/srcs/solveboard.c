@@ -21,7 +21,7 @@ int solveboard(t_p *lstpj, __uint128_t *board, int boardsize, t_p *lstp)
 	//				printf("solveboard before placepiece, height : %d\n", lstpj->height);
 					if(place_piece(i, lstpj, board, boardsize))
 					{
-	//			 		print_board(lstp, boardsize);
+			 			//print_board(lstp, boardsize);
 						lstpj += 1;
 						if (solveboard(lstpj, board, boardsize, lstp))
 							return (1);

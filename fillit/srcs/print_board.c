@@ -46,13 +46,15 @@ void	print_board(t_p* lstp, int w)
 		i++;
 	}
 	i = 0;
-	while (i < w * w + 1)
+	while ((i < w * w + 1) && final[i])
+	//while (i < w * w + 1)
 	{
 		if (i > 0 && (i % w == 0))
 			write(1,"\n", 1);
 		write(1, &final[i], 1);
 		i++;
 	}
+	write(1,"\n", 1);
 	free(final);
 }
 
