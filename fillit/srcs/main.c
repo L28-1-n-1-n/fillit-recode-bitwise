@@ -6,6 +6,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h> /*to remove*/
+int   print_usage()
+{
+	write(1, "usage: ./fillit <file name>\n", 28);
+	return (0);
+}
 
 int		main(int argc, char **argv)
 {
@@ -21,19 +26,16 @@ int		main(int argc, char **argv)
 		j = 0;
 
 		if (argc != 2)
-				return (0);
+				return (print_usage());
 		if ((!(board = (__uint128_t *)malloc(sizeof(__uint128_t) * 2)) ||
 				(!(lstp = (t_p *)malloc(sizeof(t_p) * 27)))))
-			return (0);
+			return (print_usage());
 		/*27 becoz 26 + 1 block to signal end of block stream*/
 		if (open(argv[1], O_RDONLY) < 1)
-				return (0);
+				return (print_usage());
 		j = read_blocks((open(argv[1], O_RDONLY)), lstp);
 		if (j == ERROR)
-	   {
-	      write(1, "Error\n", 6);
-	      return (0);
-	   }
+			return (print_usage());
 		boardsize = ft_lsqrt(j * 4); /*gives minimum possible width to begin with*/
 		gen_board(board, boardsize);
 
