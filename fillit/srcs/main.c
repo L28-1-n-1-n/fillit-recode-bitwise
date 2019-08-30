@@ -8,13 +8,15 @@
 #include <time.h> /*to remove*/
 int   print_usage()
 {
-	write(1, "usage: ./fillit <file name>\n", 28);
+	//write(1, "usage: ./fillit <file name>\n", 28);
 	return (0);
 }
 
 int		main(int argc, char **argv)
 {
 		int		j;
+		int n_count;
+		int fd;
 		int		boardsize;
 		t_p		*lstp;
 		__uint128_t		*board;
@@ -24,16 +26,29 @@ int		main(int argc, char **argv)
 		start = clock(); /*to remove*/
 
 		j = 0;
-
+		n_count = 0;
 		if (argc != 2)
 				return (print_usage());
+		fd = open(argv[1], O_RDONLY);
+		if ((fd) < 1)
+				return (print_usage());
+		n_count = count_endl(fd);
+		printf("n_count in main is %d\n", n_count);
+		if ((n_count <= 0) || (n_count % 5 != 4))
+		{
+			close(fd);
+			return(print_usage());
+		}
+		n_count = n_count / 5 + 1;
+		printf("no. of blocks is %d\n", n_count);
 		if ((!(board = (__uint128_t *)malloc(sizeof(__uint128_t) * 2)) ||
-				(!(lstp = (t_p *)malloc(sizeof(t_p) * 27)))))
-			return (print_usage());
+				(!(lstp = (t_p *)malloc(sizeof(t_p) * (n_count + 1))))))
+			return (0);
 		/*27 becoz 26 + 1 block to signal end of block stream*/
 		if (open(argv[1], O_RDONLY) < 1)
 				return (print_usage());
-		j = read_blocks((open(argv[1], O_RDONLY)), lstp);
+		j = read_blocks((open(argv[1], O_RDONLY)), lstp, n_count + 1);
+
 		if (j == ERROR)
 			return (print_usage());
 		boardsize = ft_lsqrt(j * 4); /*gives minimum possible width to begin with*/

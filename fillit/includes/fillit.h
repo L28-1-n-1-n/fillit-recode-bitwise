@@ -24,6 +24,7 @@
 # define NA "YEEEEE"
 # define ER "EEEEEE"
 # define ERROR -1
+# define P_END -2
 
 # include "libft.h"
 # include <stdint.h>
@@ -39,7 +40,8 @@ struct				s_p
 	unsigned int	found;
 };
 
-int		read_blocks(int fd, t_p *lstp);
+int 	count_endl(const int fd);
+int		read_blocks(int fd, t_p *lstp, int n_count);
 int		tetri_offset(int *arr, t_p *lstpj);
 int		define_blocks(char *o_arr, t_p *lstpj);
 int		ft_lsqrt(int nb);

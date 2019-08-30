@@ -15,6 +15,46 @@
 #include <unistd.h>
 #include <stdio.h>
 
+int  open_file(const int fd, char *buff)
+{
+	if (fd < 0 || read(fd, buff, 0) < 0)
+		return (ERROR);
+	return (read(fd, buff, BUFF_SIZE));
+}
+
+int		count_endl(const int fd)
+{
+	char buff[22]; /*needs to be 1 more than 21 so error blocks longer than 21 units can be read*/
+	int nb;
+	int i;
+	int n_count;
+
+	i = 0;
+	n_count = 0;
+	nb = 21;
+
+	while ((nb == 21) && (i < 130))
+	{
+		ft_bzero(buff, 22);
+		nb = open_file(fd, buff);
+	/*End-Of-File condition is when no more bytes are read*/
+		if((nb == 0) || (buff[0] == '\0')) /*/dev/zero file*/
+			return (n_count);
+		while (i < 21)
+		{
+			if (buff[i] == '\n')
+				n_count++;
+			i++;
+		}
+		i = 0;
+		if (nb != 21)
+			return(n_count);
+	}
+	return (ERROR); //becoz you would have read 26 pieces, and the last char is \n in buff[20], so error
+}
+
+
+
 int	valid_block(char *temp, t_p *lstpj)
 {
 	/*valid_block returns 1 if valid, 0 if not valid*/
@@ -65,11 +105,10 @@ int		get_next_block(const int fd, t_p *lstpj)
 		return (0);
 	if (nb != 21)
 	{
-		ft_putstr("nb read is not 21\n");/*the block read is less than 21 */
-		return (ERROR);
+		//ft_putstr("nb read is not 21\n");/*the block read is less than 21 */
+			return (ERROR);
 	}
 	buff[21] = '\0'; /*change the last "\n" into \0*/
-
 	return (valid_block(buff, lstpj));
 }
 
@@ -89,7 +128,7 @@ void init_blocks(t_p *lstp)
 		ret++;
 	}
 }
-int		read_blocks(int fd, t_p *lstp)
+int		read_blocks(int fd, t_p *lstp, int n_count)
 {
 	int			ret;
 	int			j;
