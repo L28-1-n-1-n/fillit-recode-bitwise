@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gen_board.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlo <marvin@42.fr>                         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/31 12:53:20 by hlo               #+#    #+#             */
+/*   Updated: 2019/08/31 12:57:05 by hlo              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
-void  gen_upperboard(__uint128_t *board, int w, int i)
+void	gen_upperboard(__uint128_t *board, int w, int i)
 {
 	while (i <= 8)
 	{
@@ -18,6 +29,7 @@ void  gen_upperboard(__uint128_t *board, int w, int i)
 	}
 	board[1] += ((__uint128_t)65535 << ((16 - w - 1)) * 16);
 }
+
 void	gen_board(__uint128_t *board, int w)
 {
 	int i;
@@ -32,20 +44,20 @@ void	gen_board(__uint128_t *board, int w)
 			board[0] += ((__uint128_t)1 << (128 - 16 * i + (16 - w - 1)));
 			i++;
 		}
-		board[0] += ((__uint128_t)65535 << ((8 - w -1) * 16));
+		board[0] += ((__uint128_t)65535 << ((8 - w - 1) * 16));
 	}
 	else
-			gen_upperboard(board, w, i);
+		gen_upperboard(board, w, i);
 }
 
-void	write_alpha(t_p* lstpj, char *final, char alpha, int w)
+void	write_alpha(t_p *lstpj, char *final, char alpha, int w)
 {
 	int i;
 	int k;
 
 	i = 3;
 	k = 1;
-	while(lstpj->name[k] != 0)
+	while (lstpj->name[k] != 0)
 	{
 		while (i >= 0)
 		{
@@ -58,11 +70,11 @@ void	write_alpha(t_p* lstpj, char *final, char alpha, int w)
 	}
 }
 
-void	print_board(t_p* lstp, int w)
+void	print_board(t_p *lstp, int w)
 {
-	char *final;
-	char alpha;
-	int i;
+	char	*final;
+	char	alpha;
+	int		i;
 
 	i = 0;
 	if (!(final = (char *)malloc(sizeof(char) * (w * w))))
@@ -78,10 +90,10 @@ void	print_board(t_p* lstp, int w)
 	while ((i < w * w + 1) && final[i])
 	{
 		if (i > 0 && (i % w == 0))
-			write(1,"\n", 1);
+			write(1, "\n", 1);
 		write(1, &final[i], 1);
 		i++;
 	}
-	write(1,"\n", 1);
+	write(1, "\n", 1);
 	free(final);
 }

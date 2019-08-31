@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fillit.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlo <marvin@42.fr>                         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/31 13:15:57 by hlo               #+#    #+#             */
+/*   Updated: 2019/08/31 13:31:32 by hlo              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FILLIT_H
 # define FILLIT_H
 
@@ -30,32 +42,28 @@
 # define USAGE_ERROR -5
 
 # include "libft.h"
+# include <stdint.h>
 
-typedef struct s_p 	t_p;
+typedef struct s_p	t_p;
 struct				s_p
 {
 	unsigned int	name[6];
 	unsigned int	pos;
 	__uint128_t		value;
-	unsigned int 	height;
+	unsigned int	height;
 	unsigned int	found;
 };
 
-int 	count_endl(const int fd);
-int		read_blocks(int fd, t_p *lstp, int n_count);
-int		tetri_offset(int *arr, t_p *lstpj);
-int		define_blocks(char *o_arr, t_p *lstpj);
-int		ft_lsqrt(int nb);
-int		issafe(int i, int *name, int w);
-void	gen_arr(int *arr);
-void	gen_board(__uint128_t *board, int w);
-int		place_piece(int i, t_p *lstpj, __uint128_t *board, int w);
-void	unplace_piece(int i, t_p *lstpj, __uint128_t *board, int w);
-void	print_board(t_p*lstp, int boardsize);
-int		solveboard(t_p *lstpj, __uint128_t *board, int boardsize, t_p *lstp);
-
-
-
-
-
+int					count_endl(const int fd);
+int					read_blocks(int fd, t_p *lstp, int n_count);
+int					tetri_offset(int *arr, t_p *lstpj);
+int					define_blocks(char *o_arr, t_p *lstpj);
+int					ft_lsqrt(int nb);
+int					issafe(int i, int *name, int w);
+void				gen_arr(int *arr);
+void				gen_board(__uint128_t *board, int w);
+int					place_piece(int i, t_p *lstpj, __uint128_t *board, int w);
+void				unplace_piece(int i, t_p *lstpj, __uint128_t *board, int w);
+void				print_board(t_p*lstp, int boardsize);
+int					solve(t_p *lstpj, __uint128_t *board, int bsize, t_p *lstp);
 #endif

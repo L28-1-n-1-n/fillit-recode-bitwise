@@ -6,16 +6,14 @@
 /*   By: hlo <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 22:48:52 by hlo               #+#    #+#             */
-/*   Updated: 2019/01/30 23:47:46 by hlo              ###   ########.fr       */
+/*   Updated: 2019/08/31 12:58:58 by hlo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdlib.h>
 #include <unistd.h>
-#include <stdio.h>
 
-int	valid_block(char *temp, t_p *lstpj, int n_count)
+int		valid_block(char *temp, t_p *lstpj, int n_count)
 {
 	int i;
 	int count;
@@ -32,7 +30,7 @@ int	valid_block(char *temp, t_p *lstpj, int n_count)
 			if ((n_count != 2) || (i != 20))
 				return (ERROR);
 		if (i != 20 && (i + 1) % 5 != 0 && (temp[i] != '.') && (temp[i] != '#'))
-				return (ERROR);
+			return (ERROR);
 		if (temp[i] == '#')
 		{
 			arr[count] = i;
@@ -41,18 +39,18 @@ int	valid_block(char *temp, t_p *lstpj, int n_count)
 	}
 	if (count != 4 || arr[0] == -1 || arr[4] != -1)
 		return (ERROR);
-	return(tetri_offset(arr, lstpj));
+	return (tetri_offset(arr, lstpj));
 }
 
 int		get_next_block(const int fd, t_p *lstpj, int n_count)
 {
-	char buff[22];
-	int nb;
+	char	buff[22];
+	int		nb;
 
 	if (fd < 0 || read(fd, buff, 0) < 0)
 		return (ERROR);
 	nb = read(fd, buff, BUFF_SIZE);
-	if((nb == 0) || (buff[0] == '\0'))
+	if ((nb == 0) || (buff[0] == '\0'))
 		return (0);
 	if ((nb != 21) && (n_count != 2))
 		return (ERROR);
@@ -60,7 +58,7 @@ int		get_next_block(const int fd, t_p *lstpj, int n_count)
 	return (valid_block(buff, lstpj, n_count));
 }
 
-void init_blocks(t_p *lstp, int n_count)
+void	init_blocks(t_p *lstp, int n_count)
 {
 	int ret;
 
@@ -75,6 +73,7 @@ void init_blocks(t_p *lstp, int n_count)
 		ret++;
 	}
 }
+
 int		read_blocks(int fd, t_p *lstp, int n_count)
 {
 	int			ret;
@@ -86,7 +85,7 @@ int		read_blocks(int fd, t_p *lstp, int n_count)
 	while ((ret = get_next_block(fd, &lstp[j], n_count - j)) > 0)
 		j++;
 	if (ret == ERROR)
-    return (ERROR);
+		return (ERROR);
 	close(fd);
 	return (j);
 }

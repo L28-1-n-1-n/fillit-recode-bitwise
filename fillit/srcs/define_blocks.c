@@ -6,20 +6,18 @@
 /*   By: hlo <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 19:10:32 by hlo               #+#    #+#             */
-/*   Updated: 2019/05/04 19:10:45 by hlo              ###   ########.fr       */
+/*   Updated: 2019/08/31 12:53:11 by hlo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdlib.h>
-#include <stdio.h>
 
-int define_blocks(char *o_arr, t_p *lstpj)
+int		define_blocks(char *o_arr, t_p *lstpj)
 {
 	int i;
 
 	i = 0;
-  if (o_arr == ER)
+	if (o_arr == ER)
 		return (ERROR);
 	while (i < 6)
 	{
@@ -29,14 +27,14 @@ int define_blocks(char *o_arr, t_p *lstpj)
 	i = 1;
 	while (lstpj->name[i])
 	{
-		lstpj->value |= ((__uint128_t)(lstpj->name[i]) << ( 128 - 16 * i + 12));
+		lstpj->value |= ((__uint128_t)(lstpj->name[i]) << (128 - 16 * i + 12));
 		i++;
 	}
 	lstpj->height = i - 1;
 	return (1);
 }
 
-char *id_tetri_extend(int *arr)
+char	*id_tetri_extend(int *arr)
 {
 	if ((arr[1] == 1) && (arr[2] == 2))
 	{
@@ -65,7 +63,7 @@ char *id_tetri_extend(int *arr)
 	return (ER);
 }
 
-char *id_tetri(int *arr)
+char	*id_tetri(int *arr)
 {
 	if ((arr[1] == 1) && (arr[2] == 4) && (arr[3] == 5))
 		return (ZR);
@@ -93,7 +91,7 @@ char *id_tetri(int *arr)
 	return (id_tetri_extend(arr));
 }
 
-int  tetri_offset(int *arr, t_p *lstpj)
+int		tetri_offset(int *arr, t_p *lstpj)
 {
 	int	tmp;
 	int i;
