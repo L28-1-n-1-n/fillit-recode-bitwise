@@ -19,24 +19,20 @@ int define_blocks(char *o_arr, t_p *lstpj)
 	int i;
 
 	i = 0;
-  if (o_arr == ER) /*ER block assigned for invalid block*/
+  if (o_arr == ER)
 		return (ERROR);
 	while (i < 6)
 	{
 		lstpj->name[i] = o_arr[i] - 'E';
 		i++;
 	}
-
-	i = 1; /*starts from the first position that codes for block shape*/
+	i = 1;
 	while (lstpj->name[i])
 	{
 		lstpj->value |= ((__uint128_t)(lstpj->name[i]) << ( 128 - 16 * i + 12));
 		i++;
 	}
 	lstpj->height = i - 1;
-
-	//printf("i is %d and lstpj->height is %d\n", i, lstpj->height);
-
 	return (1);
 }
 
@@ -44,8 +40,6 @@ char *id_tetri_extend(int *arr)
 {
 	if ((arr[1] == 1) && (arr[2] == 2))
 	{
-		if (arr[3] == 3)
-			return (H);
 		if (arr[3] == 5)
 			return (RU);
 		if (arr[3] == 6)
@@ -94,6 +88,8 @@ char *id_tetri(int *arr)
 		if (arr[3] == 9)
 			return (ZU);
 	}
+	if ((arr[1] == 1) && (arr[2] == 2) && (arr[3] == 3))
+		return (H);
 	return (id_tetri_extend(arr));
 }
 

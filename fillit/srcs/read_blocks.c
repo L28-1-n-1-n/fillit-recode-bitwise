@@ -15,43 +15,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int  open_file(const int fd, char *buff)
-{
-	if (fd < 0 || read(fd, buff, 0) < 0)
-		return (ERROR);
-	return (read(fd, buff, BUFF_SIZE));
-}
-
-int		count_endl(const int fd)
-{
-	char buff[22];
-	int nb;
-	int i;
-	int n_count;
-
-	i = 0;
-	n_count = 0;
-	nb = 21;
-	while (nb == 21)
-	{
-		ft_bzero(buff, 22);
-		nb = open_file(fd, buff);
-		if((nb == 0) || (buff[0] == '\0'))
-			return (n_count);
-		while (i < 21)
-		{
-			if (buff[i] == '\n')
-				n_count++;
-			i++;
-		}
-		i = 0;
-		if (nb != 21)
-			return(n_count);
-	}
-	return (ERROR);
-}
-
-int	valid_block(char *temp, t_p *lstpj, int n_count) /*valid_block returns 1 if valid, 0 if not valid*/
+int	valid_block(char *temp, t_p *lstpj, int n_count)
 {
 	int i;
 	int count;
@@ -67,7 +31,7 @@ int	valid_block(char *temp, t_p *lstpj, int n_count) /*valid_block returns 1 if 
 		if ((((i + 1) % 5 == 0) || i == 20) && (temp[i] != '\n'))
 			if ((n_count != 2) || (i != 20))
 				return (ERROR);
-		if (((i != 20) && ((i + 1) % 5 != 0)) && ((temp[i] != '.') && (temp[i] != '#')))
+		if (i != 20 && (i + 1) % 5 != 0 && (temp[i] != '.') && (temp[i] != '#'))
 				return (ERROR);
 		if (temp[i] == '#')
 		{

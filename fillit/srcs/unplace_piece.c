@@ -3,20 +3,24 @@
 
 void	unplace_piece(int i, t_p *lstpj, __uint128_t *board, int w)
 {
-	if ((i / w) > 7) /* i.e. 8 or above, case when it only affects board[1]*/
+	if ((i / w) > 7)
 	{
-		board[1] = (board[1] ^ ((__uint128_t)(lstpj->value >> ((i / w - 8) * 16 + i % w))));
+		board[1] = (board[1] ^ ((__uint128_t)
+		(lstpj->value >> ((i / w - 8) * 16 + i % w))));
 	}
 	else
 	{
-		if ((i / w) + lstpj->height <= 8) //Essentially (i/w + height - 1 <= 7), meaning last line of piece falls within 128, or board[0]
+		if ((i / w) + lstpj->height <= 8)
 			{
-				board[0] = (board[0] ^ ((__uint128_t)(lstpj->value >> ((i / w) * 16 + i % w))));
+				board[0] = (board[0] ^ ((__uint128_t)
+				(lstpj->value >> ((i / w) * 16 + i % w))));
 			}
-		else // case where piece needs to be split
+		else
 			{
-					board[0] = (board[0] ^ ((__uint128_t)(lstpj->value >> ((i / w) * 16 + i % w))));
-					board[1] = (board[1] ^ ((__uint128_t)((lstpj->value << (i / w + lstpj->height - 8) * 16) >> i % w )));
+					board[0] = (board[0] ^ ((__uint128_t)
+					(lstpj->value >> ((i / w) * 16 + i % w))));
+					board[1] = (board[1] ^ ((__uint128_t)((lstpj->value <<
+						(i / w + lstpj->height - 8) * 16) >> i % w )));
 			}
 	}
 	lstpj->pos = 400;

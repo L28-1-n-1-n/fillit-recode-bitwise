@@ -25,10 +25,12 @@
 # define ER "EEEEEE"
 # define ERROR -1
 # define P_END -2
+# define OPEN_ERROR -3
+# define BLOCK_ERROR -4
+# define USAGE_ERROR -5
 
 # include "libft.h"
 //# include <stdint.h>
-
 
 typedef struct s_p 	t_p;
 struct				s_p
