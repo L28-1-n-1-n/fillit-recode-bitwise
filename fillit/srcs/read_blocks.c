@@ -24,7 +24,7 @@ int  open_file(const int fd, char *buff)
 
 int		count_endl(const int fd)
 {
-	char buff[22]; /*needs to be 1 more than 21 so error blocks longer than 21 units can be read*/
+	char buff[22];
 	int nb;
 	int i;
 	int n_count;
@@ -32,13 +32,11 @@ int		count_endl(const int fd)
 	i = 0;
 	n_count = 0;
 	nb = 21;
-
-	while ((nb == 21) && (i < 130))
+	while (nb == 21)
 	{
 		ft_bzero(buff, 22);
 		nb = open_file(fd, buff);
-	/*End-Of-File condition is when no more bytes are read*/
-		if((nb == 0) || (buff[0] == '\0')) /*/dev/zero file*/
+		if((nb == 0) || (buff[0] == '\0'))
 			return (n_count);
 		while (i < 21)
 		{
@@ -50,7 +48,7 @@ int		count_endl(const int fd)
 		if (nb != 21)
 			return(n_count);
 	}
-	return (ERROR); //becoz you would have read 26 pieces, and the last char is \n in buff[20], so error
+	return (ERROR);
 }
 
 int	valid_block(char *temp, t_p *lstpj, int n_count) /*valid_block returns 1 if valid, 0 if not valid*/
@@ -67,35 +65,34 @@ int	valid_block(char *temp, t_p *lstpj, int n_count) /*valid_block returns 1 if 
 		if (count == 5)
 			return (ERROR);
 		if ((((i + 1) % 5 == 0) || i == 20) && (temp[i] != '\n'))
-			if ((n_count != 2) || (i != 20)) // check if it is second last piece, and if it is, is the \n absent only at the end
-				return (ERROR); /*Check if all postions that are supposed to be \n is actually \n*/
+			if ((n_count != 2) || (i != 20))
+				return (ERROR);
 		if (((i != 20) && ((i + 1) % 5 != 0)) && ((temp[i] != '.') && (temp[i] != '#')))
-				return (ERROR); /*Check if all other positions are occupied by either '.' or '#' only*/
+				return (ERROR);
 		if (temp[i] == '#')
 		{
 			arr[count] = i;
 			count++;
 		}
-	}/*input the positions or index of all '#' into an array of size 5, so that arr[0] - arr[3] will be positive, and since only 4 '#' should be preseent, content of arr[4] should remain '-1'*/
+	}
 	if (count != 4 || arr[0] == -1 || arr[4] != -1)
-		return (ERROR);/*count != 4 --> less than 4 '#' found; arr[4] != -1 --> more than 4 '#' found */
+		return (ERROR);
 	return(tetri_offset(arr, lstpj));
 }
 
 int		get_next_block(const int fd, t_p *lstpj, int n_count)
 {
-	char buff[22]; /*needs to be 1 more than 21 so error blocks longer than 21 units can be read*/
+	char buff[22];
 	int nb;
 
 	if (fd < 0 || read(fd, buff, 0) < 0)
 		return (ERROR);
 	nb = read(fd, buff, BUFF_SIZE);
-	/*End-Of-File condition is when no more bytes are read*/
-	if((nb == 0) || (buff[0] == '\0')) /*/dev/zero file*/
+	if((nb == 0) || (buff[0] == '\0'))
 		return (0);
 	if ((nb != 21) && (n_count != 2))
 		return (ERROR);
-	buff[21] = '\0'; /*change the last "\n" into \0*/
+	buff[21] = '\0';
 	return (valid_block(buff, lstpj, n_count));
 }
 
@@ -106,7 +103,6 @@ void init_blocks(t_p *lstp, int n_count)
 	ret = 0;
 	while (ret < n_count)
 	{
-		/*initialize with null values*/
 		define_blocks(NA, &lstp[ret]);
 		lstp[ret].pos = 400;
 		lstp[ret].value = 0;
@@ -128,6 +124,5 @@ int		read_blocks(int fd, t_p *lstp, int n_count)
 	if (ret == ERROR)
     return (ERROR);
 	close(fd);
-	/*no. of pieces is correct becoz j starts at 0, so if j is now 6, there is 0, 1, 2, 3, 4, 5--> this in total is 6 pieces after j++ */
-	return (j); /*output the number of blocks written into lstp*/
+	return (j);
 }

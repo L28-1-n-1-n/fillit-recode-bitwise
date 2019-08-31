@@ -27,14 +27,14 @@
 # define P_END -2
 
 # include "libft.h"
-# include <stdint.h>
+//# include <stdint.h>
 
 
 typedef struct s_p 	t_p;
 struct				s_p
 {
 	unsigned int	name[6];
-	unsigned int	pos; /* value is pos of the block in board eventually*/
+	unsigned int	pos;
 	__uint128_t		value;
 	unsigned int 	height;
 	unsigned int	found;
