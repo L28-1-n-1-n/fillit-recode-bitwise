@@ -7,6 +7,11 @@
 #include <stdlib.h>
 #include <time.h> /*to remove*/
 
+int 	print_file_error()
+{
+	write(1, "failed to open file\n", 20);
+	return (0);
+}
 int   print_error()
 {
 	write(1, "error\n", 6);
@@ -15,7 +20,7 @@ int   print_error()
 
 int   print_usage()
 {
-	//write(1, "usage: ./fillit <file name>\n", 28);
+	write(1, "usage: ./fillit <file name>\n", 28);
 	return (0);
 }
 
@@ -38,7 +43,7 @@ int		main(int argc, char **argv)
 				return (print_usage());
 		fd = open(argv[1], O_RDONLY);
 		if ((fd) < 1)
-				return (print_usage());
+				return (print_file_error());
 		n_count = count_endl(fd);
 		if ((n_count <= 0) || (n_count % 5 != 4))
 		{
@@ -80,7 +85,8 @@ int		main(int argc, char **argv)
 		}
 
 		print_board(lstp, boardsize);
-
+		free(board);
+		free(lstp);
 		end = clock(); /*to remove*/
 		total_time = ((double) (end - start)/CLOCKS_PER_SEC); /*to remove*/
 	//	printf("Time taken: %f seconds\n", total_time); /*to remove*/

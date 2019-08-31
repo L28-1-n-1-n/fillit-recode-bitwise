@@ -53,19 +53,16 @@ int		count_endl(const int fd)
 	return (ERROR); //becoz you would have read 26 pieces, and the last char is \n in buff[20], so error
 }
 
-int	valid_block(char *temp, t_p *lstpj, int n_count)
+int	valid_block(char *temp, t_p *lstpj, int n_count) /*valid_block returns 1 if valid, 0 if not valid*/
 {
-	/*valid_block returns 1 if valid, 0 if not valid*/
 	int i;
 	int count;
 	int arr[5];
 
-	i = 0;
 	count = 0;
-	while (i < 5)
-		arr[i++] = -1;
-	i = 0;
-	while ((i < 21))
+	i = -1;
+	ft_memset(&arr, -1, sizeof(int) * 5);
+	while (i++ < 20)
 	{
 		if (count == 5)
 			return (ERROR);
@@ -73,20 +70,15 @@ int	valid_block(char *temp, t_p *lstpj, int n_count)
 			if ((n_count != 2) || (i != 20)) // check if it is second last piece, and if it is, is the \n absent only at the end
 				return (ERROR); /*Check if all postions that are supposed to be \n is actually \n*/
 		if (((i != 20) && ((i + 1) % 5 != 0)) && ((temp[i] != '.') && (temp[i] != '#')))
-		//	if(check_last_piece(temp, i, lstp, n_count))
 				return (ERROR); /*Check if all other positions are occupied by either '.' or '#' only*/
 		if (temp[i] == '#')
 		{
 			arr[count] = i;
 			count++;
 		}
-		i++;
 	}/*input the positions or index of all '#' into an array of size 5, so that arr[0] - arr[3] will be positive, and since only 4 '#' should be preseent, content of arr[4] should remain '-1'*/
-	i = 0;
-
 	if (count != 4 || arr[0] == -1 || arr[4] != -1)
-		return (ERROR);
-	/*count != 4 --> less than 4 '#' found; arr[4] != -1 --> more than 4 '#' found */
+		return (ERROR);/*count != 4 --> less than 4 '#' found; arr[4] != -1 --> more than 4 '#' found */
 	return(tetri_offset(arr, lstpj));
 }
 
@@ -94,6 +86,7 @@ int		get_next_block(const int fd, t_p *lstpj, int n_count)
 {
 	char buff[22]; /*needs to be 1 more than 21 so error blocks longer than 21 units can be read*/
 	int nb;
+
 	if (fd < 0 || read(fd, buff, 0) < 0)
 		return (ERROR);
 	nb = read(fd, buff, BUFF_SIZE);
