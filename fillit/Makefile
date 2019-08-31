@@ -20,8 +20,7 @@ SRCDIR = srcs
 OBJDIR = objs
 INCDIR = includes
 
-SRCS = main.c define_blocks.c place_piece.c print_board.c read_blocks.c \
-				solveboard.c unplace_piece.c gen_board.c
+SRCS = main.c define_blocks.c read_blocks.c solveboard.c gen_board.c
 
 HEAD = fillit.h
 

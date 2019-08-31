@@ -30,7 +30,6 @@
 # define USAGE_ERROR -5
 
 # include "libft.h"
-//# include <stdint.h>
 
 typedef struct s_p 	t_p;
 struct				s_p
