@@ -6,6 +6,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h> /*to remove*/
+
+int   print_error()
+{
+	write(1, "error\n", 6);
+	return (0);
+}
+
 int   print_usage()
 {
 	//write(1, "usage: ./fillit <file name>\n", 28);
@@ -33,14 +40,12 @@ int		main(int argc, char **argv)
 		if ((fd) < 1)
 				return (print_usage());
 		n_count = count_endl(fd);
-		printf("n_count in main is %d\n", n_count);
 		if ((n_count <= 0) || (n_count % 5 != 4))
 		{
 			close(fd);
-			return(print_usage());
+			return(print_error());
 		}
 		n_count = n_count / 5 + 1;
-		printf("no. of blocks is %d\n", n_count);
 		if ((!(board = (__uint128_t *)malloc(sizeof(__uint128_t) * 2)) ||
 				(!(lstp = (t_p *)malloc(sizeof(t_p) * (n_count + 1))))))
 			return (0);
@@ -50,7 +55,7 @@ int		main(int argc, char **argv)
 		j = read_blocks((open(argv[1], O_RDONLY)), lstp, n_count + 1);
 
 		if (j == ERROR)
-			return (print_usage());
+			return (print_error());
 		boardsize = ft_lsqrt(j * 4); /*gives minimum possible width to begin with*/
 		gen_board(board, boardsize);
 

@@ -53,9 +53,7 @@ int		count_endl(const int fd)
 	return (ERROR); //becoz you would have read 26 pieces, and the last char is \n in buff[20], so error
 }
 
-
-
-int	valid_block(char *temp, t_p *lstpj)
+int	valid_block(char *temp, t_p *lstpj, int n_count)
 {
 	/*valid_block returns 1 if valid, 0 if not valid*/
 	int i;
@@ -64,7 +62,6 @@ int	valid_block(char *temp, t_p *lstpj)
 
 	i = 0;
 	count = 0;
-	i = 0;
 	while (i < 5)
 		arr[i++] = -1;
 	i = 0;
@@ -73,9 +70,11 @@ int	valid_block(char *temp, t_p *lstpj)
 		if (count == 5)
 			return (ERROR);
 		if ((((i + 1) % 5 == 0) || i == 20) && (temp[i] != '\n'))
-			return (ERROR); /*Check if all postions that are supposed to be \n is actually \n*/
+			if ((n_count != 2) || (i != 20)) // check if it is second last piece, and if it is, is the \n absent only at the end
+				return (ERROR); /*Check if all postions that are supposed to be \n is actually \n*/
 		if (((i != 20) && ((i + 1) % 5 != 0)) && ((temp[i] != '.') && (temp[i] != '#')))
-			return (ERROR); /*Check if all other positions are occupied by either '.' or '#' only*/
+		//	if(check_last_piece(temp, i, lstp, n_count))
+				return (ERROR); /*Check if all other positions are occupied by either '.' or '#' only*/
 		if (temp[i] == '#')
 		{
 			arr[count] = i;
@@ -88,36 +87,31 @@ int	valid_block(char *temp, t_p *lstpj)
 	if (count != 4 || arr[0] == -1 || arr[4] != -1)
 		return (ERROR);
 	/*count != 4 --> less than 4 '#' found; arr[4] != -1 --> more than 4 '#' found */
-
 	return(tetri_offset(arr, lstpj));
 }
 
-int		get_next_block(const int fd, t_p *lstpj)
+int		get_next_block(const int fd, t_p *lstpj, int n_count)
 {
 	char buff[22]; /*needs to be 1 more than 21 so error blocks longer than 21 units can be read*/
 	int nb;
-
 	if (fd < 0 || read(fd, buff, 0) < 0)
 		return (ERROR);
 	nb = read(fd, buff, BUFF_SIZE);
 	/*End-Of-File condition is when no more bytes are read*/
 	if((nb == 0) || (buff[0] == '\0')) /*/dev/zero file*/
 		return (0);
-	if (nb != 21)
-	{
-		//ft_putstr("nb read is not 21\n");/*the block read is less than 21 */
-			return (ERROR);
-	}
+	if ((nb != 21) && (n_count != 2))
+		return (ERROR);
 	buff[21] = '\0'; /*change the last "\n" into \0*/
-	return (valid_block(buff, lstpj));
+	return (valid_block(buff, lstpj, n_count));
 }
 
-void init_blocks(t_p *lstp)
+void init_blocks(t_p *lstp, int n_count)
 {
 	int ret;
 
 	ret = 0;
-	while (ret < 28)
+	while (ret < n_count)
 	{
 		/*initialize with null values*/
 		define_blocks(NA, &lstp[ret]);
@@ -135,9 +129,8 @@ int		read_blocks(int fd, t_p *lstp, int n_count)
 
 	j = 0;
 	ret = 0;
-
-	init_blocks(lstp);
-	while ((ret = get_next_block(fd, &lstp[j])) > 0)
+	init_blocks(lstp, n_count);
+	while ((ret = get_next_block(fd, &lstp[j], n_count - j)) > 0)
 		j++;
 	if (ret == ERROR)
     return (ERROR);
