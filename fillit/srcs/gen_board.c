@@ -6,7 +6,7 @@
 /*   By: hlo <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 12:53:20 by hlo               #+#    #+#             */
-/*   Updated: 2019/08/31 12:57:05 by hlo              ###   ########.fr       */
+/*   Updated: 2019/09/01 03:25:27 by hlo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	print_board(t_p *lstp, int w)
 	int		i;
 
 	i = 0;
-	if (!(final = (char *)malloc(sizeof(char) * (w * w))))
+	if (!(final = (char *)malloc(sizeof(char) * (w * w + 1))))
 		return ;
 	while (i < w * w)
 		final[i++] = '.';

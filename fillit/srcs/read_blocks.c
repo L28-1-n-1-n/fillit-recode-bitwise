@@ -6,7 +6,7 @@
 /*   By: hlo <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 22:48:52 by hlo               #+#    #+#             */
-/*   Updated: 2019/08/31 12:58:58 by hlo              ###   ########.fr       */
+/*   Updated: 2019/09/01 03:27:30 by hlo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int		get_next_block(const int fd, t_p *lstpj, int n_count)
 	char	buff[22];
 	int		nb;
 
+	ft_bzero(buff, 22);
 	if (fd < 0 || read(fd, buff, 0) < 0)
 		return (ERROR);
 	nb = read(fd, buff, BUFF_SIZE);
