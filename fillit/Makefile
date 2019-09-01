@@ -6,7 +6,7 @@
 #    By: hlo <marvin@42.fr>                         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/19 18:11:40 by hlo               #+#    #+#              #
-#    Updated: 2019/05/08 19:51:47 by hlo              ###   ########.fr        #
+#    Updated: 2019/09/01 02:51:29 by hlo              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,11 @@ RESET=	\033[0m
 
 .PHONY : clean fclean re all
 
-all: $(LIBFT) $(OBJDIR) $(NAME)
+all : $(NAME)
+
+$(NAME): $(LIBFT) $(OBJP)
+	$(CC) $(FLAGS) -I$(LIBFT) $^ -o $@
+	@echo "$(RED)fillit has now been built.\n$(RESET)"
 
 re: fclean all
 
@@ -50,10 +54,8 @@ $(LIBFT):
 	make all -C libft/
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADP)
-	    $(CC) $(FLAGS) -c -o $@ $< -I$(LIBFT) $(INCP)
-
-$(OBJDIR):
 	mkdir -p $(OBJDIR)
+	$(CC) $(FLAGS) -c -o $@ $< -I$(LIBFT) $(INCP)
 
 clean:
 	@make clean -C libft/
@@ -65,7 +67,3 @@ fclean:
 	@/bin/rm -rf $(OBJDIR)
 	@/bin/rm -rf $(NAME)
 	@echo "$(YELLOW)All object and binary files in fillit are now deleted\n$(RESET)"
-
-$(NAME): $(LIBFT) $(OBJP)
-	$(CC) $(FLAGS) -o $@ $^ -I$(LIBFT)
-	@echo "$(RED)fillit has now been built.\n$(RESET)"
