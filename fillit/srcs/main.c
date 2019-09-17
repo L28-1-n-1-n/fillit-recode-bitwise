@@ -6,7 +6,7 @@
 /*   By: hlo <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 12:40:17 by hlo               #+#    #+#             */
-/*   Updated: 2019/08/31 12:51:10 by hlo              ###   ########.fr       */
+/*   Updated: 2019/09/17 11:39:45 by hlo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,11 @@ int		output_solution(int fd, t_p *lstp, int n_count, __uint128_t *board)
 		return (print_message(USAGE_ERROR));
 	j = read_blocks(fd, lstp, n_count + 1);
 	if (j == ERROR)
+	{
+		free(board);
+		free(lstp);
 		return (print_message(BLOCK_ERROR));
+	}
 	bsize = ft_lsqrt(j * 4);
 	gen_board(board, bsize);
 	while (!solve(&lstp[0], board, bsize, lstp))
