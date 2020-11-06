@@ -1,5 +1,5 @@
 # fillit-bitwise
-Optimized Bitwise algorithm in C to find the smallest square a random combination of tetris pieces can fit into.
+Optimized Bitwise Backtracking algorithm in C to find the smallest square a random combination of tetris pieces can fit into.
 
 ### Constraints:
 * Only write and malloc function allowed
